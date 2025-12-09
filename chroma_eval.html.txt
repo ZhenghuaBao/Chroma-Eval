@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Quality Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 15px; }
+    .sample { border: 1px solid #ddd; padding: 15px; margin: 20px 0; border-radius: 8px; }
+    .audio-group { margin: 10px 0; }
+    button { background: #4285f4; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #3367d6; }
+    .selected { background: #d0e7ff !important; }
+  </style>
+</head>
+<body>
+  <h1>Voice Quality Listening Test</h1>
+  <p>Thank you for helping us improve voice technology!<br>
+     For each sample, listen to the clips and answer the question. You can replay any audio.</p>
+  <hr>
+
+  <!-- Sample 1: Naturalness -->
+  <div class="sample">
+    <h3>Sample 1: Which sounds more <strong>natural</strong>?</h3>
+    <div class="audio-group">
+      <strong>A:</strong> 
+      <audio controls preload="none"><source src="a01.mp3" type="audio/mpeg"></audio>
+    </div>
+    <div class="audio-group">
+      <strong>B:</strong> 
+      <audio controls preload="none"><source src="b01.mp3" type="audio/mpeg"></audio>
+    </div>
+    <div>
+      <button onclick="select('q1','A')">A sounds more natural</button>
+      <button onclick="select('q1','B')">B sounds more natural</button>
+      <button onclick="select('q1','same')">About the same</button>
+      <button onclick="select('q1','unsure')">Hard to tell</button>
+    </div>
+    <input type="hidden" name="q1" id="q1">
+  </div>
+
+  <!-- Sample 2: Similarity to Reference -->
+  <div class="sample">
+    <h3>Sample 2: Which sounds more like the <strong>reference speaker</strong>?</h3>
+    <div class="audio-group">
+      <strong>Reference:</strong> 
+      <audio controls preload="none"><source src="ref02.mp3" type="audio/mpeg"></audio>
+    </div>
+    <div class="audio-group">
+      <strong>A (Chroma):</strong> 
+      <audio controls preload="none"><source src="a02.mp3" type="audio/mpeg"></audio>
+    </div>
+    <div class="audio-group">
+      <strong>B (Baseline):</strong> 
+      <audio controls preload="none"><source src="b02.mp3" type="audio/mpeg"></audio>
+    </div>
+    <div>
+      <button onclick="select('q2','A')">A is more similar</button>
+      <button onclick="select('q2','B')">B is more similar</button>
+      <button onclick="select('q2','same')">About the same</button>
+      <button onclick="select('q2','unsure')">Hard to tell</button>
+    </div>
+    <input type="hidden" name="q2" id="q2">
+  </div>
+
+  <!-- Add more samples here (copy-paste blocks) -->
+
+  <button onclick="submitForm()" style="background:#34a853;font-size:1.2em;">✅ Submit Responses</button>
+
+  <script>
+    function select(q, value) {
+      document.getElementById(q).value = value;
+      // Highlight selected button
+      document.querySelectorAll(`[onclick*="'${q}'"]`).forEach(btn => btn.classList.remove('selected'));
+      event.target.classList.add('selected');
+    }
+
+    function submitForm() {
+      const data = {};
+      for (let i = 1; i <= 15; i++) {
+        const val = document.getElementById(`q${i}`)?.value;
+        if (val) data[`q${i}`] = val;
+      }
+      if (Object.keys(data).length === 0) {
+        alert("Please answer at least one question.");
+        return;
+      }
+
+      // Send to Google Sheets via Formspree (free)
+      fetch("https://formspree.io/f/xdkqlbno", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert("Thank you! Your responses have been recorded.");
+        document.body.innerHTML = "<h1>Thank You!</h1><p>We appreciate your time.</p>";
+      })
+      .catch(err => alert("Error: " + err));
+    }
+  </script>
+</body>
+</html>
