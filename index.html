@@ -135,6 +135,24 @@
     border-top: 1px solid #eee;
     margin: 25px 0;
   }
+   .section-header {
+    background: #f8f9fa;
+    padding: 14px 20px;
+    margin: 35px 0 20px;
+    border-radius: 8px;
+    border-left: 4px solid #4285f4;
+  }
+  .section-header h2 {
+    margin: 0;
+    font-size: 1.35em;
+    color: #202124;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-header h2::before {
+    font-size: 1.4em;
+  }
 
   @media (max-width: 600px) {
     button { min-width: auto; flex: 1 1 calc(50% - 8px); }
@@ -156,8 +174,10 @@
 </header>
   
 <hr>
-
-  
+<!-- Naturalness Section -->
+<div class="section-header">
+  <h2>🎯 Naturalness Evaluation</h2>
+</div>
   <!-- Sample 1: Naturalness -->
   <div class="sample">
     <h3>Sample 1: Which sounds more <strong>natural</strong>?</h3>
@@ -458,6 +478,11 @@
     <input type="hidden" name="q1" id="q1">
   </div>
 
+
+  <!-- Section: Speaker Similarity -->
+<div class="section-header">
+  <h2>🎧 Speaker Similarity Evaluation</h2>
+</div>
   <!-- Sample 2: Similarity to Reference -->
   <div class="sample">
     <h3>Sample 2: Which sounds more like the <strong>reference speaker</strong>?</h3>
@@ -520,6 +545,7 @@
   </script>
 </body>
 </html>
+
 
 
 
