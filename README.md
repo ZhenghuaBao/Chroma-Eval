@@ -4,10 +4,12 @@ A web-based CMOS evaluation for voice quality across two dimensions: **Naturalne
 
 ## Overview
 
-This listening test is designed to collect human evaluations comparing two speech-to-speech systems (Chroma vs. Baseline) using a pairwise comparison methodology. The test includes:
+This listening test is designed to collect human evaluations comparing two text-to-speech systems (Chroma vs. ElevenLabs) using a pairwise comparison methodology. The test includes:
 
 - **15 Naturalness samples**: Participants judge which audio sounds more human-like and fluent
 - **15 Speaker Similarity samples**: Participants judge which audio better matches a reference speaker's voice characteristics
+
+Total: **30 evaluation questions** (15 naturalness + 15 similarity)
 
 ## Test Structure
 
@@ -36,23 +38,26 @@ For each sample, participants:
 
 ```
 .
-├── index.html                          # Main listening test interface
+├── index.html                          # Main listening test interface (15+15 samples)
 ├── README.md                           # This file
 ├── cmos_samples.json                   # Sample metadata and file paths
 ├── download_cmos_audio.ipynb           # Jupyter notebook for downloading audio files
-├── parse_cmos_data.py                  # Script to parse and structure sample data
 ├── examples/                           # Audio files directory
-│   ├── reference_audio/                # Reference speaker audio (for similarity test)
-│   │   ├── common_voice_en_26262786.wav
-│   │   ├── common_voice_en_103675.wav
+│   ├── audio/                          # Organized audio for evaluation (75 files)
+│   │   ├── nat1_a.wav, nat1_b.wav     # Naturalness samples (30 files)
+│   │   ├── ...
+│   │   ├── nat15_a.wav, nat15_b.wav
+│   │   ├── sim1_a.wav, sim1_b.wav, sim1_ref.wav  # Similarity samples (45 files)
+│   │   ├── ...
+│   │   └── sim15_a.wav, sim15_b.wav, sim15_ref.wav
+│   ├── chroma/                         # Chroma system outputs
+│   │   ├── chroma_common_voice_en_26262786.wav
 │   │   └── ...
-│   ├── chroma_audio/                   # Chroma system outputs
-│   │   ├── sample_01.wav
-│   │   ├── sample_02.wav
+│   ├── elevenlabs/                     # ElevenLabs system outputs
+│   │   ├── elevenlabs_common_voice_en_26262786.wav
 │   │   └── ...
-│   └── elevenlabs_audio/               # ElevenLabs system outputs
-│       ├── sample_01.wav
-│       ├── sample_02.wav
+│   └── reference/                      # Reference speaker audio
+│       ├── reference_common_voice_en_26262786.wav
 │       └── ...
 └── results/                            # Response data (auto-generated)
 ```
@@ -61,63 +66,62 @@ For each sample, participants:
 
 ### 1. Prepare Audio Files
 
-#### Option A: Download from JupyterHub
+#### Option A: Automated Organization (Recommended)
+Use the provided script to automatically organize audio files:
+
+```bash
+# Run the reorganization script
+python reorganize_cmos_audio.py
+```
+
+This will:
+- Read from `cmos_samples.json` (30 samples)
+- Copy audio files from source directories (`examples/chroma/`, `examples/elevenlabs/`, `examples/reference/`)
+- Organize them into `examples/audio/` with proper naming (nat1-nat15, sim1-sim15)
+- Generate `audio_mapping.json` with randomized A/B assignments
+- Skip existing files to avoid overwriting
+
+#### Option B: Download from JupyterHub
 If your audio files are hosted on JupyterHub:
 
 1. Upload `cmos_samples.json` to your JupyterHub environment
 2. Open `download_cmos_audio.ipynb` in JupyterHub
-3. Run all cells to display audio players
+3. Run all cells to display audio players for missing samples
 4. Click the ⋮ (three dots) on each audio player and select "Download"
-5. Organize downloaded files in the `examples/` directory:
-   - Reference audio → `examples/reference_audio/`
-   - Chroma outputs → `examples/chroma_audio/`
-   - ElevenLabs outputs → `examples/elevenlabs_audio/`
+5. Organize downloaded files in the appropriate directories:
+   - Reference audio → `examples/reference/`
+   - Chroma outputs → `examples/chroma/`
+   - ElevenLabs outputs → `examples/elevenlabs/`
+6. Run `python reorganize_cmos_audio.py` to organize files
 
-#### Option B: Manual Preparation
-Place your audio files in the appropriate directories:
-- Reference audio: `examples/reference_audio/`
-- Chroma outputs: `examples/chroma_audio/`
-- ElevenLabs outputs: `examples/elevenlabs_audio/`
+#### Option C: Manual Preparation
+Place your audio files in the source directories:
+- Reference audio: `examples/reference/reference_{sample_id}.wav`
+- Chroma outputs: `examples/chroma/chroma_{sample_id}.wav`
+- ElevenLabs outputs: `examples/elevenlabs/elevenlabs_{sample_id}.wav`
 
-### 2. Update Audio File Paths
+Then run the reorganization script to create the evaluation structure.
 
-Edit `index.html` and update the `<source>` tags with your actual file paths:
+### 2. Verify Audio Files
 
-```html
-<!-- Example for Naturalness: Chroma vs. ElevenLabs -->
-<div class="audio-group">
-  <strong>A (Chroma):</strong> 
-  <audio controls preload="none">
-    <source src="examples/chroma_audio/sample_01.wav" type="audio/wav">
-  </audio>
-</div>
-<div class="audio-group">
-  <strong>B (ElevenLabs):</strong> 
-  <audio controls preload="none">
-    <source src="examples/elevenlabs_audio/sample_01.wav" type="audio/wav">
-  </audio>
-</div>
+After running the reorganization script, verify that all audio files are in place:
 
-<!-- Example for Similarity: Reference + Chroma vs. ElevenLabs -->
-<div class="audio-group">
-  <strong>Reference:</strong> 
-  <audio controls preload="none">
-    <source src="examples/reference_audio/common_voice_en_26262786.wav" type="audio/wav">
-  </audio>
-</div>
-<div class="audio-group">
-  <strong>A (Chroma):</strong> 
-  <audio controls preload="none">
-    <source src="examples/chroma_audio/sample_01.wav" type="audio/wav">
-  </audio>
-</div>
-<div class="audio-group">
-  <strong>B (ElevenLabs):</strong> 
-  <audio controls preload="none">
-    <source src="examples/elevenlabs_audio/sample_01.wav" type="audio/wav">
-  </audio>
-</div>
+```bash
+# Check that all 75 audio files exist
+ls examples/audio/*.wav | wc -l  # Should output: 75
+
+# Verify naturalness files (30 files)
+ls examples/audio/nat*.wav | wc -l  # Should output: 30
+
+# Verify similarity files (45 files)
+ls examples/audio/sim*.wav | wc -l  # Should output: 45
 ```
+
+The audio files are already correctly referenced in `index.html`:
+- Naturalness: `audio/nat1_a.wav` through `audio/nat15_b.wav`
+- Similarity: `audio/sim1_a.wav`, `audio/sim1_b.wav`, `audio/sim1_ref.wav` through `audio/sim15_ref.wav`
+
+**Note**: The A/B assignments (Chroma vs. ElevenLabs) are randomized and recorded in `audio_mapping.json`. Participants see only "A" and "B" labels without knowing which system is which.
 
 ### 3. Configure Data Collection
 
@@ -191,12 +195,17 @@ git push -u origin main
 
 **Collecting Data:**
 - Responses are sent to your configured endpoint (Formspree/custom backend)
-- Data format: `{"q1": "A", "q2": "B", "q3": "same", ...}`
+- Data format: `{"nat1": "A", "nat2": "B", "sim1": "same", ...}`
+- Each response includes question ID and selected option (A, B, same, or unsure)
 
 **Analyzing Results:**
-- Download response data from Formspree dashboard or your backend
-- Calculate preference percentages for each sample
-- Compute overall scores (e.g., % preference for System A vs. B)
+1. Download response data from Formspree dashboard or your backend
+2. Use `audio_mapping.json` to map A/B labels to actual systems (Chroma/ElevenLabs)
+3. Calculate preference percentages for each sample
+4. Compute overall scores:
+   - Naturalness: % preference for Chroma vs. ElevenLabs
+   - Similarity: % preference for Chroma vs. ElevenLabs in matching reference
+5. Statistical analysis (e.g., binomial test, confidence intervals)
 
 ## Data Format
 
@@ -215,11 +224,52 @@ git push -u origin main
 ### Response Data
 ```json
 {
-  "q1": "A",
-  "q2": "B",
-  "q3": "same",
-  "q4": "unsure",
+  "nat1": "A",
+  "nat2": "B",
+  "nat3": "same",
+  "nat4": "unsure",
+  "sim1": "A",
+  "sim2": "B",
   ...
+}
+```
+
+### Audio Mapping (`audio_mapping.json`)
+```json
+{
+  "naturalness": [
+    {
+      "sample_id": "common_voice_en_26262786",
+      "question_id": "nat1",
+      "text": "In his youth, he did not join...",
+      "option_a": {
+        "system": "ElevenLabs",
+        "display_file": "audio/nat1_a.wav"
+      },
+      "option_b": {
+        "system": "Chroma",
+        "display_file": "audio/nat1_b.wav"
+      }
+    }
+  ],
+  "similarity": [
+    {
+      "sample_id": "common_voice_en_32647806",
+      "question_id": "sim1",
+      "text": "He continued systematic field research...",
+      "reference": {
+        "display_file": "audio/sim1_ref.wav"
+      },
+      "option_a": {
+        "system": "Chroma",
+        "display_file": "audio/sim1_a.wav"
+      },
+      "option_b": {
+        "system": "ElevenLabs",
+        "display_file": "audio/sim1_b.wav"
+      }
+    }
+  ]
 }
 ```
 
@@ -237,12 +287,24 @@ The test includes a privacy notice informing participants that:
 ## Customization
 
 ### Modify Number of Samples
-Edit `index.html` and:
-1. Add/remove `<div class="sample">` blocks
-2. Update the question IDs (`q1`, `q2`, etc.)
-3. Update the loop in `submitForm()` function:
+The current setup has 15 naturalness + 15 similarity samples. To change:
+
+1. Edit `cmos_samples.json` to add/remove samples
+2. Run `python reorganize_cmos_audio.py` to regenerate audio files
+3. Edit `index.html`:
+   - Add/remove `<div class="sample">` blocks
+   - Update the question IDs (`nat1`-`nat15`, `sim1`-`sim15`)
+   - Update the loops in `submitForm()` function:
    ```javascript
-   for (let i = 1; i <= YOUR_SAMPLE_COUNT; i++) {
+   // Update these numbers to match your sample count
+   for (let i = 1; i <= 15; i++) {  // Naturalness count
+     const val = document.getElementById(`nat${i}`)?.value;
+     if (val) data[`nat${i}`] = val;
+   }
+   for (let i = 1; i <= 15; i++) {  // Similarity count
+     const val = document.getElementById(`sim${i}`)?.value;
+     if (val) data[`sim${i}`] = val;
+   }
    ```
 
 ### Change Button Options
@@ -293,14 +355,31 @@ Edit the `<style>` section in `index.html` to customize:
 
 ## Scripts
 
-### `parse_cmos_data.py`
-Parses raw text data into structured JSON format:
+### `reorganize_cmos_audio.py`
+Organizes audio files for CMOS evaluation:
 ```bash
-python parse_cmos_data.py
+python reorganize_cmos_audio.py
 ```
+- Reads `cmos_samples.json` (30 samples)
+- Splits into 15 naturalness + 15 similarity samples
+- Copies and renames audio files to `examples/audio/`
+- Generates `audio_mapping.json` with randomized A/B assignments
+- Uses seed=42 for reproducibility
+
+### `filter_cmos_samples.py`
+Identifies missing audio files:
+```bash
+python filter_cmos_samples.py
+```
+- Checks `examples/chroma/` for existing files
+- Creates `cmos_samples_missing.json` with samples that need to be downloaded
+- Useful for incremental audio collection
 
 ### `download_cmos_audio.ipynb`
-Jupyter notebook for downloading audio files from JupyterHub. See notebook for usage instructions.
+Jupyter notebook for downloading audio files from JupyterHub:
+- Displays audio players for reference files
+- Can be configured to show only missing samples
+- See notebook for usage instructions
 
 ## License
 
