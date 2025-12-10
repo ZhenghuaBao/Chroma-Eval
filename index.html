@@ -78,9 +78,9 @@
     }
   
     button {
-    background: #e8eaed;          /* Light neutral base — improves contrast */
-    color: #5f6368;               /* Medium-dark text */
-    border: 1px solid #dadce0;    /* Subtle border */
+    background: #e8eaed;
+    color: #5f6368;
+    border: 1px solid #dadce0;
     padding: 10px 16px;
     border-radius: 6px;
     cursor: pointer;
@@ -99,8 +99,8 @@
   }
   
   button.selected {
-    background: #d2e3fc;          /* Clearer "selected" highlight — Google-style blue */
-    color: #174ea6;               /* Dark blue text for readability */
+    background: #d2e3fc;
+    color: #174ea6;
     border-color: #aab5c9;
     box-shadow: 0 2px 4px rgba(23, 78, 166, 0.15);
     font-weight: 600;
@@ -111,12 +111,14 @@
     cursor: not-allowed;
   }
   
-     button:focus-visible {
+  button:focus-visible {
     outline: 2px solid #4285f4;
     outline-offset: 2px;
   }
+  
   .submit-btn {
     background: #34a853 !important;
+    color: white !important;
     font-size: 1.1em;
     padding: 12px 24px;
     display: block;
@@ -135,13 +137,15 @@
     border-top: 1px solid #eee;
     margin: 25px 0;
   }
-   .section-header {
+  
+  .section-header {
     background: #f8f9fa;
     padding: 14px 20px;
     margin: 35px 0 20px;
     border-radius: 8px;
     border-left: 4px solid #4285f4;
   }
+  
   .section-header h2 {
     margin: 0;
     font-size: 1.35em;
@@ -150,6 +154,7 @@
     align-items: center;
     gap: 10px;
   }
+  
   .section-header h2::before {
     font-size: 1.4em;
   }
@@ -159,6 +164,7 @@
   }
 </style>
 </head>
+<body>
 <header>
   <h1>Voice Quality Listening Test</h1>
   <p class="intro">Thank you for helping us improve voice technology!<br>
@@ -174,6 +180,7 @@
 </header>
   
 <hr>
+
 <!-- Naturalness Section -->
 <div class="section-header">
   <h2>🎯 Naturalness Evaluation</h2>
@@ -181,379 +188,407 @@
     Focus on how human-like and fluent the speech sounds — ignore speaker identity.
   </p>
 </div>
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 1: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+
+<!-- Sample 1: Naturalness -->
+<div class="sample">
+  <h3>Sample 1: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 2: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 3: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="btn-group">
+    <button onclick="select('nat1','A')">A sounds more natural</button>
+    <button onclick="select('nat1','B')">B sounds more natural</button>
+    <button onclick="select('nat1','same')">About the same</button>
+    <button onclick="select('nat1','unsure')">Hard to tell</button>
   </div>
+  <input type="hidden" name="nat1" id="nat1">
+</div>
 
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 4: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+<!-- Sample 2: Naturalness -->
+<div class="sample">
+  <h3>Sample 2: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 5: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 6: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="btn-group">
+    <button onclick="select('nat2','A')">A sounds more natural</button>
+    <button onclick="select('nat2','B')">B sounds more natural</button>
+    <button onclick="select('nat2','same')">About the same</button>
+    <button onclick="select('nat2','unsure')">Hard to tell</button>
   </div>
+  <input type="hidden" name="nat2" id="nat2">
+</div>
 
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 7: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+<!-- Sample 3: Naturalness -->
+<div class="sample">
+  <h3>Sample 3: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 8: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 9: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="btn-group">
+    <button onclick="select('nat3','A')">A sounds more natural</button>
+    <button onclick="select('nat3','B')">B sounds more natural</button>
+    <button onclick="select('nat3','same')">About the same</button>
+    <button onclick="select('nat3','unsure')">Hard to tell</button>
   </div>
+  <input type="hidden" name="nat3" id="nat3">
+</div>
 
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 10: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+<!-- Sample 4: Naturalness -->
+<div class="sample">
+  <h3>Sample 4: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 11: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 12: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="btn-group">
+    <button onclick="select('nat4','A')">A sounds more natural</button>
+    <button onclick="select('nat4','B')">B sounds more natural</button>
+    <button onclick="select('nat4','same')">About the same</button>
+    <button onclick="select('nat4','unsure')">Hard to tell</button>
   </div>
+  <input type="hidden" name="nat4" id="nat4">
+</div>
 
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 13: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+<!-- Sample 5: Naturalness -->
+<div class="sample">
+  <h3>Sample 5: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 14: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
   </div>
-
-  <!-- Sample 1: Naturalness -->
-  <div class="sample">
-    <h3>Sample 15: Which sounds more <strong>natural</strong>?</h3>
-    <div class="audio-group">
-      <strong>A:</strong> 
-      <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B:</strong> 
-      <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
-    </div>
-    <div>
-      <button onclick="select('q1','A')">A sounds more natural</button>
-      <button onclick="select('q1','B')">B sounds more natural</button>
-      <button onclick="select('q1','same')">About the same</button>
-      <button onclick="select('q1','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q1" id="q1">
+  <div class="btn-group">
+    <button onclick="select('nat5','A')">A sounds more natural</button>
+    <button onclick="select('nat5','B')">B sounds more natural</button>
+    <button onclick="select('nat5','same')">About the same</button>
+    <button onclick="select('nat5','unsure')">Hard to tell</button>
   </div>
+  <input type="hidden" name="nat5" id="nat5">
+</div>
 
+<!-- Sample 6: Naturalness -->
+<div class="sample">
+  <h3>Sample 6: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat6','A')">A sounds more natural</button>
+    <button onclick="select('nat6','B')">B sounds more natural</button>
+    <button onclick="select('nat6','same')">About the same</button>
+    <button onclick="select('nat6','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat6" id="nat6">
+</div>
 
-  <!-- Section: Speaker Similarity -->
+<!-- Sample 7: Naturalness -->
+<div class="sample">
+  <h3>Sample 7: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat7','A')">A sounds more natural</button>
+    <button onclick="select('nat7','B')">B sounds more natural</button>
+    <button onclick="select('nat7','same')">About the same</button>
+    <button onclick="select('nat7','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat7" id="nat7">
+</div>
+
+<!-- Sample 8: Naturalness -->
+<div class="sample">
+  <h3>Sample 8: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat8','A')">A sounds more natural</button>
+    <button onclick="select('nat8','B')">B sounds more natural</button>
+    <button onclick="select('nat8','same')">About the same</button>
+    <button onclick="select('nat8','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat8" id="nat8">
+</div>
+
+<!-- Sample 9: Naturalness -->
+<div class="sample">
+  <h3>Sample 9: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat9','A')">A sounds more natural</button>
+    <button onclick="select('nat9','B')">B sounds more natural</button>
+    <button onclick="select('nat9','same')">About the same</button>
+    <button onclick="select('nat9','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat9" id="nat9">
+</div>
+
+<!-- Sample 10: Naturalness -->
+<div class="sample">
+  <h3>Sample 10: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat10','A')">A sounds more natural</button>
+    <button onclick="select('nat10','B')">B sounds more natural</button>
+    <button onclick="select('nat10','same')">About the same</button>
+    <button onclick="select('nat10','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat10" id="nat10">
+</div>
+
+<!-- Sample 11: Naturalness -->
+<div class="sample">
+  <h3>Sample 11: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat11','A')">A sounds more natural</button>
+    <button onclick="select('nat11','B')">B sounds more natural</button>
+    <button onclick="select('nat11','same')">About the same</button>
+    <button onclick="select('nat11','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat11" id="nat11">
+</div>
+
+<!-- Sample 12: Naturalness -->
+<div class="sample">
+  <h3>Sample 12: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat12','A')">A sounds more natural</button>
+    <button onclick="select('nat12','B')">B sounds more natural</button>
+    <button onclick="select('nat12','same')">About the same</button>
+    <button onclick="select('nat12','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat12" id="nat12">
+</div>
+
+<!-- Sample 13: Naturalness -->
+<div class="sample">
+  <h3>Sample 13: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat13','A')">A sounds more natural</button>
+    <button onclick="select('nat13','B')">B sounds more natural</button>
+    <button onclick="select('nat13','same')">About the same</button>
+    <button onclick="select('nat13','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat13" id="nat13">
+</div>
+
+<!-- Sample 14: Naturalness -->
+<div class="sample">
+  <h3>Sample 14: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat14','A')">A sounds more natural</button>
+    <button onclick="select('nat14','B')">B sounds more natural</button>
+    <button onclick="select('nat14','same')">About the same</button>
+    <button onclick="select('nat14','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat14" id="nat14">
+</div>
+
+<!-- Sample 15: Naturalness -->
+<div class="sample">
+  <h3>Sample 15: Which sounds more <strong>natural</strong>?</h3>
+  <div class="audio-group">
+    <strong>A:</strong> 
+    <audio controls preload="none"><source src="下载 (1).wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B:</strong> 
+    <audio controls preload="none"><source src="下载.wav" type="audio/wav"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('nat15','A')">A sounds more natural</button>
+    <button onclick="select('nat15','B')">B sounds more natural</button>
+    <button onclick="select('nat15','same')">About the same</button>
+    <button onclick="select('nat15','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="nat15" id="nat15">
+</div>
+
+<!-- Section: Speaker Similarity -->
 <div class="section-header">
   <h2>🎧 Speaker Similarity Evaluation</h2>
   <p style="margin: 6px 0 0; color: #5f6368; font-size: 0.95em;">
     Listen to the <strong>Reference</strong> first. Then decide which of A or B best matches their voice (timbre, pitch, speaking style).
   </p>
 </div>
-  <!-- Sample 2: Similarity to Reference -->
-  <div class="sample">
-    <h3>Sample 2: Which sounds more like the <strong>reference speaker</strong>?</h3>
-    <div class="audio-group">
-      <strong>Reference:</strong> 
-      <audio controls preload="none"><source src="ref02.mp3" type="audio/mpeg"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>A (Chroma):</strong> 
-      <audio controls preload="none"><source src="a02.mp3" type="audio/mpeg"></audio>
-    </div>
-    <div class="audio-group">
-      <strong>B (Baseline):</strong> 
-      <audio controls preload="none"><source src="b02.mp3" type="audio/mpeg"></audio>
-    </div>
-    <div>
-      <button onclick="select('q2','A')">A is more similar</button>
-      <button onclick="select('q2','B')">B is more similar</button>
-      <button onclick="select('q2','same')">About the same</button>
-      <button onclick="select('q2','unsure')">Hard to tell</button>
-    </div>
-    <input type="hidden" name="q2" id="q2">
+
+<!-- Sample 1: Similarity to Reference -->
+<div class="sample">
+  <h3>Sample 1: Which sounds more like the <strong>reference speaker</strong>?</h3>
+  <div class="audio-group">
+    <strong>Reference:</strong> 
+    <audio controls preload="none"><source src="ref01.mp3" type="audio/mpeg"></audio>
   </div>
+  <div class="audio-group">
+    <strong>A (Chroma):</strong> 
+    <audio controls preload="none"><source src="a01.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B (ElevenLabs):</strong> 
+    <audio controls preload="none"><source src="b01.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('sim1','A')">A is more similar</button>
+    <button onclick="select('sim1','B')">B is more similar</button>
+    <button onclick="select('sim1','same')">About the same</button>
+    <button onclick="select('sim1','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="sim1" id="sim1">
+</div>
 
-  <!-- Add more samples here (copy-paste blocks) -->
+<!-- Sample 2: Similarity to Reference -->
+<div class="sample">
+  <h3>Sample 2: Which sounds more like the <strong>reference speaker</strong>?</h3>
+  <div class="audio-group">
+    <strong>Reference:</strong> 
+    <audio controls preload="none"><source src="ref02.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>A (Chroma):</strong> 
+    <audio controls preload="none"><source src="a02.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div class="audio-group">
+    <strong>B (ElevenLabs):</strong> 
+    <audio controls preload="none"><source src="b02.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div class="btn-group">
+    <button onclick="select('sim2','A')">A is more similar</button>
+    <button onclick="select('sim2','B')">B is more similar</button>
+    <button onclick="select('sim2','same')">About the same</button>
+    <button onclick="select('sim2','unsure')">Hard to tell</button>
+  </div>
+  <input type="hidden" name="sim2" id="sim2">
+</div>
 
-  <button class="submit-btn" onclick="submitForm()">✅ Submit Responses</button>
+<button class="submit-btn" onclick="submitForm()">✅ Submit Responses</button>
 
-  <script>
-    function select(q, value) {
-      document.getElementById(q).value = value;
-      // Highlight selected button
-      document.querySelectorAll(`[onclick*="'${q}'"]`).forEach(btn => btn.classList.remove('selected'));
-      event.target.classList.add('selected');
+<script>
+  function select(q, value) {
+    document.getElementById(q).value = value;
+    // Highlight selected button - only for buttons in this specific question
+    const parentSample = event.target.closest('.sample');
+    parentSample.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+    event.target.classList.add('selected');
+  }
+
+  function submitForm() {
+    const data = {};
+    
+    // Collect naturalness responses (nat1-nat15)
+    for (let i = 1; i <= 15; i++) {
+      const val = document.getElementById(`nat${i}`)?.value;
+      if (val) data[`nat${i}`] = val;
+    }
+    
+    // Collect similarity responses (sim1-sim15)
+    for (let i = 1; i <= 15; i++) {
+      const val = document.getElementById(`sim${i}`)?.value;
+      if (val) data[`sim${i}`] = val;
+    }
+    
+    if (Object.keys(data).length === 0) {
+      alert("Please answer at least one question.");
+      return;
     }
 
-    function submitForm() {
-      const data = {};
-      for (let i = 1; i <= 15; i++) {
-        const val = document.getElementById(`q${i}`)?.value;
-        if (val) data[`q${i}`] = val;
-      }
-      if (Object.keys(data).length === 0) {
-        alert("Please answer at least one question.");
-        return;
-      }
-
-      // Send to Google Sheets via Formspree (free)
-      fetch("https://formspree.io/f/xdkqlbno", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(() => {
-        alert("Thank you! Your responses have been recorded.");
-        document.body.innerHTML = "<h1>Thank You!</h1><p>We appreciate your time.</p>";
-      })
-      .catch(err => alert("Error: " + err));
-    }
-  </script>
+    // Send to Formspree
+    fetch("https://formspree.io/f/xdkqlbno", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      alert("Thank you! Your responses have been recorded.");
+      document.body.innerHTML = "<h1>Thank You!</h1><p>We appreciate your time.</p>";
+    })
+    .catch(err => alert("Error: " + err));
+  }
+</script>
 </body>
 </html>
-
-
-
-
-
 
